@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      VirtualScroll2 - Active: {{virtualItems.length}}/{{items.length}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+<ion-content scrollEvents="true" (ionScroll)="onScroll($event)" #mainContainer>
+  <div class="list" #listContainer [style.paddingTop]="(startIndex * rowHeight) + 'px'">
+    <div *ngFor="let item of virtualItems" [style.height]="'68px'">
+      {{item}}
+    </div>
+    <div class="list-spacer" [style.height]="((items.length - endIndex) * rowHeight) + 'px'"></div>
   </div>
 </ion-content>
